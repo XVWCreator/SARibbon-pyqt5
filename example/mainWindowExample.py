@@ -4,6 +4,7 @@
 @Author     ROOT
 """
 import sys
+sys.path.append(R"Q:\AIWorkBench5.0\SARibbon-pyqt5\src")
 
 from PyQt5.QtCore import Qt, QFile, QIODevice, QXmlStreamWriter, QTextStream
 from PyQt5.QtGui import QIcon, QKeySequence, QColor
