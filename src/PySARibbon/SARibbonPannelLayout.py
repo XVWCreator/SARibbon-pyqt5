@@ -287,7 +287,7 @@ class SARibbonPannelLayout(QLayout):
                     column += 1
                 item.rowIndex = 0
                 item.columnIndex = column
-                item.itemWillSetGeometry = QRect(x, magin.top(), hint.width(), largeH)
+                item.itemWillSetGeometry = QRect(int(x), int(magin.top()), int(hint.width()), int(largeH))
                 # 换列，x自动递增到下个坐标，列数增加，行数归零，最大列宽归零
                 x += hint.width() + spacing
                 row = 0
@@ -302,12 +302,12 @@ class SARibbonPannelLayout(QLayout):
                 item.rowIndex = row
                 item.columnIndex = column
                 if row == 0:
-                    item.itemWillSetGeometry = QRect(x, medy0, hint.width(), smallH)
+                    item.itemWillSetGeometry = QRect(int(x), int(medy0), int(hint.width()), int(smallH))
                     row = 1
                     columMaxWidth = hint.width()
                     lastRow0RP = SARibbonPannelItem.RPMedium
                 else:
-                    item.itemWillSetGeometry = QRect(x, medy1, hint.width(), smallH)
+                    item.itemWillSetGeometry = QRect(int(x), int(medy1), int(hint.width()), int(smallH))
                     # 换列
                     x += max(columMaxWidth, hint.width()) + spacing
                     row = 0
@@ -317,14 +317,14 @@ class SARibbonPannelLayout(QLayout):
                 item.rowIndex = row
                 item.columnIndex = column
                 if row == 0:
-                    item.itemWillSetGeometry = QRect(x, smly0, hint.width(), smallH)
+                    item.itemWillSetGeometry = QRect(int(x), int(smly0), int(hint.width()), int(smallH))
                     columMaxWidth = hint.width()
                     row = 1
                     lastRow0RP = SARibbonPannelItem.RPSmall
                 elif row == 1:
                     # 若第一行是Medium，按Medium排列
                     y1 = medy1 if lastRow0RP == SARibbonPannelItem.RPMedium else smly1
-                    item.itemWillSetGeometry = QRect(x, y1, hint.width(), smallH)
+                    item.itemWillSetGeometry = QRect(int(x), int(y1), int(hint.width()), int(smallH))
                     if 2 == rowCount or lastRow0RP == SARibbonPannelItem.RPMedium:
                         x += max(columMaxWidth, hint.width()) + spacing
                         row = 0
@@ -334,7 +334,7 @@ class SARibbonPannelLayout(QLayout):
                         row = 2
                         columMaxWidth = max(columMaxWidth, hint.width())
                 else:
-                    item.itemWillSetGeometry = QRect(x, smly2, hint.width(), smallH)
+                    item.itemWillSetGeometry = QRect(int(x), int(smly2), int(hint.width()), int(smallH))
                     # 换列
                     x += max(columMaxWidth, hint.width()) + spacing
                     row = 0
@@ -403,12 +403,12 @@ class SARibbonPannelLayout(QLayout):
                     continue
                 if item.columnIndex == key:     # 此列的扩展
                     if item in value['expandItems']:
-                        item.itemWillSetGeometry.setWidth(value['columnExpandedWidth'])
+                        item.itemWillSetGeometry.setWidth(int(value['columnExpandedWidth']))
                     else:
                         continue
                 else:
                     # 后面item的往左移动
-                    item.itemWillSetGeometry.moveLeft(item.itemWillSetGeometry.x()+moveXLen)
+                    item.itemWillSetGeometry.moveLeft(int(item.itemWillSetGeometry.x()+moveXLen))
 
     def columnWidthInfo(self, colindex: int, width: int, maximum: int) -> (int, int):
         rwidth = width

@@ -47,5 +47,5 @@ class SARibbonSeparatorWidget(QWidget):
         painter = QPainter(self)
         painter.setPen(self.palette().window().color().darker(114))
         x1 = self.rect().center().x()
-        painter.drawLine(QPoint(x1, self.rect().top() + self.m_topMargins),
-                         QPoint(x1, self.rect().bottom() - self.m_bottomMargins))
+        painter.drawLine(QPoint(int(x1), int(self.rect().top() + self.m_topMargins)),
+                         QPoint(int(x1), int(self.rect().bottom() - self.m_bottomMargins)))

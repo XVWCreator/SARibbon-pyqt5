@@ -156,7 +156,7 @@ class SARibbonGallery(QFrame):
             return
         popupMenuSize = self.popupWidget.minimumSizeHint()
         start = self.mapToGlobal(QPoint(0, 0))
-        self.popupWidget.setGeometry(start.x(), start.y(), self.width(), popupMenuSize.height())
+        self.popupWidget.setGeometry(int(start.x()), int(start.y()), int(self.width()), int(popupMenuSize.height()))
         self.popupWidget.show()
 
     def onItemClicked(self, index: QModelIndex):
@@ -175,14 +175,14 @@ class SARibbonGallery(QFrame):
     def resizeEvent(self, e):
         r = e.size()
         subW = 0
-        self.buttonUp.move(r.width() - self.buttonUp.width(), 0)
+        self.buttonUp.move(int(r.width() - self.buttonUp.width()), 0)
         subW = max(subW, self.buttonUp.width())
-        self.buttonDown.move(r.width() - self.buttonDown.width(), self.buttonDown.height())
+        self.buttonDown.move(int(r.width() - self.buttonDown.width()), int(self.buttonDown.height()))
         subW = max(subW, self.buttonDown.width())
-        self.buttonMore.move(r.width() - self.buttonMore.width(), self.buttonDown.geometry().bottom())
+        self.buttonMore.move(int(r.width() - self.buttonMore.width()), int(self.buttonDown.geometry().bottom()))
         subW = max(subW, self.buttonMore.width())
         if self.viewportGroup:
-            self.viewportGroup.setGeometry(0, 0, r.width() - subW, r.height())
+            self.viewportGroup.setGeometry(0, 0, int(r.width() - subW), int(r.height()))
         super().resizeEvent(e)
 
     # 信号

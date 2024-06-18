@@ -35,7 +35,7 @@ class SARibbonDrawHelper:
         if len(_args) < 1:
             return
         if isinstance(_args[0], int):
-            rect = QRect(_args[0], _args[1], _args[2], _args[3])
+            rect = QRect(int(_args[0]), int(_args[1]), int(_args[2]), int(_args[3]))
         else:
             rect = _args[0]
 
@@ -74,7 +74,7 @@ class SARibbonDrawHelper:
         if len(_args) < 1:
             return
         if isinstance(_args[0], int):
-            rect = QRect(_args[0], _args[1], _args[2], _args[3])
+            rect = QRect(int(_args[0]), int(_args[1]), int(_args[2]), int(_args[3]))
         else:
             rect = _args[0]
 

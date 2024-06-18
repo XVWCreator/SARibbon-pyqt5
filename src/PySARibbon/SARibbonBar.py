@@ -137,7 +137,7 @@ class SARibbonBarPrivate:
         if not btn.objectName():
             btn.setObjectName('objSAApplicationButton')
         btn.setVisible(True)
-        btn.move(0, RibbonSubElementStyleOpt.titleBarHeight)
+        btn.move(0, int(RibbonSubElementStyleOpt.titleBarHeight))
         self.applitionButton = btn
         self.applitionButton.clicked.connect(self.mainClass.applitionButtonClicked)
 
@@ -681,20 +681,20 @@ class SARibbonBar(QMenuBar):
             connerSize = connerL.sizeHint()
             if connerSize.height() < validTitleBarHeight:
                 detal = (validTitleBarHeight - connerSize.height()) / 2
-                connerL.setGeometry(x, y+detal, connerSize.width(), connerSize.height())
+                connerL.setGeometry(int(x), int(y+detal), int(connerSize.width()), int(connerSize.height()))
             else:
-                connerL.setGeometry(x, y, connerSize.width(), validTitleBarHeight)
+                connerL.setGeometry(int(x), int(y), int(connerSize.width()), int(validTitleBarHeight))
             x = connerL.geometry().right() + 5
         # quick access bar定位
         if self.m_d.quickAccessBar and self.m_d.quickAccessBar.isVisible():
             quickAccessBarSize = self.m_d.quickAccessBar.sizeHint()
-            self.m_d.quickAccessBar.setGeometry(x, y, quickAccessBarSize.width(), validTitleBarHeight)
+            self.m_d.quickAccessBar.setGeometry(int(x), int(y), int(quickAccessBarSize.width()), int(validTitleBarHeight))
 
         # 第二行，开始布局applitionButton，tabbar，tabBarRightSizeButtonGroupWidget，TopRightCorner
         x = RibbonSubElementStyleOpt.widgetBord.left()
         y = titleH + RibbonSubElementStyleOpt.widgetBord.top()
         if self.m_d.applitionButton and self.m_d.applitionButton.isVisible():
-            self.m_d.applitionButton.setGeometry(x, y, self.applitionButtonWidth(), tabH)
+            self.m_d.applitionButton.setGeometry(int(x), int(y), int(self.applitionButtonWidth()), int(tabH))
             x = self.m_d.applitionButton.geometry().right()
         # top right是一定要配置的，对于多文档窗口，子窗口的缩放等按钮就是通过这个窗口实现
         endX = self.width() - RibbonSubElementStyleOpt.widgetBord.right()
@@ -704,17 +704,17 @@ class SARibbonBar(QMenuBar):
             endX -= connerSize.width()
             if connerSize.height() < tabH:
                 detal = (tabH - connerSize.height()) / 2
-                connerR.setGeometry(endX, y+detal, connerSize.width(), connerSize.height())
+                connerR.setGeometry(int(endX), int(y+detal), int(connerSize.width()), int(connerSize.height()))
             else:
-                connerR.setGeometry(endX, y, connerSize.width(), tabH)
+                connerR.setGeometry(int(endX), int(y), int(connerSize.width()), int(tabH))
         # tabBar 右边的附加按钮组，这里一般会附加一些类似登录等按钮组
         if self.m_d.tabBarRightSizeButtonGroupWidget and self.m_d.tabBarRightSizeButtonGroupWidget.isVisible():
             wSize = self.m_d.tabBarRightSizeButtonGroupWidget.sizeHint()
             endX -= wSize.width()
-            self.m_d.tabBarRightSizeButtonGroupWidget.setGeometry(endX, y, wSize.width(), tabH)
+            self.m_d.tabBarRightSizeButtonGroupWidget.setGeometry(int(endX), int(y), int(wSize.width()), int(tabH))
         # 最后确定tabbar宽度
         tabBarWidth = endX - x
-        self.m_d.ribbonTabBar.setGeometry(x, y, tabBarWidth, tabH)
+        self.m_d.ribbonTabBar.setGeometry(int(x), int(y), int(tabBarWidth), int(tabH))
         # 调整整个stackedContainer
         self.resizeStackedContainerWidget()
 
@@ -727,7 +727,7 @@ class SARibbonBar(QMenuBar):
         validTitleBarHeight = titleH - y
         # WPS风格下applitionButton 先定位
         if self.m_d.applitionButton and self.m_d.applitionButton.isVisible():
-            self.m_d.applitionButton.setGeometry(x, y, self.applitionButtonWidth(), titleH)
+            self.m_d.applitionButton.setGeometry(int(x), int(y), int(self.applitionButtonWidth()), int(titleH))
             x = self.m_d.applitionButton.geometry().right() + 2
 
         # applitionButton定位完后先布局右边内容
@@ -738,14 +738,14 @@ class SARibbonBar(QMenuBar):
             endX -= connerSize.width()
             if connerSize.height() < validTitleBarHeight:
                 detal = (validTitleBarHeight - connerSize.height()) / 2
-                connerR.setGeometry(endX, y + detal, connerSize.width(), connerSize.height())
+                connerR.setGeometry(int(endX), int(y + detal), int(connerSize.width()), int(connerSize.height()))
             else:
-                connerR.setGeometry(endX, y, connerSize.width(), validTitleBarHeight)
+                connerR.setGeometry(int(endX), int(y), int(connerSize.width()), int(validTitleBarHeight))
         # quickAccessBar定位右边邻接buttonGroup
         if self.m_d.quickAccessBar and self.m_d.quickAccessBar.isVisible():
             quickAccessBarSize = self.m_d.quickAccessBar.sizeHint()
             endX -= quickAccessBarSize.width()
-            self.m_d.quickAccessBar.setGeometry(endX, y, quickAccessBarSize.width(), validTitleBarHeight)
+            self.m_d.quickAccessBar.setGeometry(int(endX), int(y), int(quickAccessBarSize.width()), int(validTitleBarHeight))
 
         connerL = self.cornerWidget(Qt.TopLeftCorner)
         if connerL and connerL.isVisible():
@@ -753,23 +753,23 @@ class SARibbonBar(QMenuBar):
             endX -= connerSize.width()
             if connerSize.height() < validTitleBarHeight:
                 detal = (validTitleBarHeight - connerSize.height()) / 2
-                connerL.setGeometry(endX, y + detal, connerSize.width(), connerSize.height())
+                connerL.setGeometry(int(endX), int(y + detal), int(connerSize.width()), int(connerSize.height()))
             else:
-                connerL.setGeometry(endX, y, connerSize.width(), validTitleBarHeight)
+                connerL.setGeometry(int(endX), int(y), int(connerSize.width()), int(validTitleBarHeight))
 
         # 开始定位tabbar以及tabBarRightSizeButtonGroupWidget
         # tab bar 定位 wps模式下applitionButton的右边就是tab bar, tabBar 右边的附加按钮组
         if self.m_d.tabBarRightSizeButtonGroupWidget and self.m_d.tabBarRightSizeButtonGroupWidget.isVisible():
             wSize = self.m_d.tabBarRightSizeButtonGroupWidget.sizeHint()
             endX -= wSize.width()
-            self.m_d.tabBarRightSizeButtonGroupWidget.setGeometry(endX, y, wSize.width(), validTitleBarHeight)
+            self.m_d.tabBarRightSizeButtonGroupWidget.setGeometry(int(endX), int(y), int(wSize.width()), int(validTitleBarHeight))
 
         # 计算tab所占用的宽度，最后确定tabbar宽度
         tabBarWidth = min(endX - x, self.calcMinTabBarWidth())
         tabH = min(self.tabBarHeight(), validTitleBarHeight)
         # 如果tabH较小，则下以，让tab底部和title的底部对齐
         y = y + validTitleBarHeight - tabH
-        self.m_d.ribbonTabBar.setGeometry(x, y, tabBarWidth, tabH)
+        self.m_d.ribbonTabBar.setGeometry(int(x), int(y), int(tabBarWidth), int(tabH))
         # 调整整个stackedContainer
         self.resizeStackedContainerWidget()
 
@@ -780,7 +780,7 @@ class SARibbonBar(QMenuBar):
 
         p.save()
         # 显示上下文标签
-        contextCategoryRegion = QPoint(self.width(), -1)
+        contextCategoryRegion = QPoint(int(self.width()), int(-1))
         for ccd in self.m_d.currentShowingContextCategory:
             indexs = ccd.tabPageIndex
             clr = ccd.contextCategory.contextColor()
@@ -804,7 +804,7 @@ class SARibbonBar(QMenuBar):
             if self.m_d.ribbonTabBar.currentIndex() in indexs:
                 pen = QPen()
                 pen.setColor(clr)
-                pen.setWidth(1)
+                pen.setWidth(int(1))
                 p.setPen(pen)
                 p.setBrush(Qt.NoBrush)
                 p.drawRect(self.m_d.stackedContainerWidget.geometry())
@@ -866,7 +866,7 @@ class SARibbonBar(QMenuBar):
             if self.m_d.ribbonTabBar.currentIndex() in indexs:
                 pen = QPen()
                 pen.setColor(clr)
-                pen.setWidth(1)
+                pen.setWidth(int(1))
                 p.setPen(pen)
                 p.setBrush(Qt.NoBrush)
                 p.drawRect(self.m_d.stackedContainerWidget.geometry())
@@ -878,14 +878,14 @@ class SARibbonBar(QMenuBar):
             start = self.m_d.ribbonTabBar.x() + self.m_d.ribbonTabBar.width()
             width = self.m_d.quickAccessBar.x() - start
             if width > 20:
-                titleRegion = QRect(start, RibbonSubElementStyleOpt.widgetBord.top(), width, RibbonSubElementStyleOpt.titleBarHeight)
+                titleRegion = QRect(int(start), int(RibbonSubElementStyleOpt.widgetBord.top()), int(width), int(RibbonSubElementStyleOpt.titleBarHeight))
                 self.paintWindowTitle(p, parWindow.windowTitle(), titleRegion)
                 self.paintWindowIcon(p, parWindow.windowIcon())
 
     def resizeStackedContainerWidget(self):
         if self.m_d.stackedContainerWidget.isPopupMode():
             # 弹出模式时，高度
-            absPosition = self.mapToGlobal(QPoint(RibbonSubElementStyleOpt.widgetBord.left(), self.m_d.ribbonTabBar.geometry().bottom()+1))
+            absPosition = self.mapToGlobal(QPoint(int(RibbonSubElementStyleOpt.widgetBord.left()), int(self.m_d.ribbonTabBar.geometry().bottom()+1)))
             self.m_d.stackedContainerWidget.setGeometry(
                 absPosition.x(),
                 absPosition.y(),
@@ -925,11 +925,11 @@ class SARibbonBar(QMenuBar):
         # 在tabbar下绘制一条线
         lineY = self.m_d.ribbonTabBar.geometry().bottom()
         pen = QPen(RibbonSubElementStyleOpt.tabBarBaseLineColor)
-        pen.setWidth(1)
+        pen.setWidth(int(1))
         pen.setStyle(Qt.SolidLine)
         painter.setPen(pen)
-        painter.drawLine(QPoint(RibbonSubElementStyleOpt.widgetBord.left(), lineY),
-                         QPoint(self.width()-RibbonSubElementStyleOpt.widgetBord.right()-1, lineY))
+        painter.drawLine(QPoint(int(RibbonSubElementStyleOpt.widgetBord.left()), int(lineY)),
+                         QPoint(int(self.width()-RibbonSubElementStyleOpt.widgetBord.right()-1), int(lineY)))
         painter.restore()
 
     def paintWindowTitle(self, painter: QPainter, title: str, titleRegion: QRect):
@@ -957,7 +957,7 @@ class SARibbonBar(QMenuBar):
         painter.save()
         painter.setPen(Qt.NoPen)
         painter.setBrush(color)
-        painter.drawRect(QRect(contextRect.x(), RibbonSubElementStyleOpt.widgetBord.top(), contextRect.width(), 5))
+        painter.drawRect(QRect(int(contextRect.x()), int(RibbonSubElementStyleOpt.widgetBord.top()), int(contextRect.width()), 5))
 
         # 剩下把颜色变亮90%
         gColor = color.lighter(190)     # c++使用的light()已停用，使用ligher()代替

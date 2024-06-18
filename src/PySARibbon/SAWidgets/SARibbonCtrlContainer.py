@@ -28,12 +28,12 @@ class SARibbonCtrlContainer(QWidget):
         if self.enableDrawIcon:
             icon = self.windowIcon()
             if not icon.isNull():
-                sizeHint.setWidth(sizeHint.width() + sizeHint.height())
+                sizeHint.setWidth(int(sizeHint.width() + sizeHint.height()))
         if self.enableDrawTitle:
             text = self.windowTitle()
             if text:
                 textWidth = self.fontMetrics().horizontalAdvance(text)
-                sizeHint.setWidth(sizeHint.width() + textWidth)
+                sizeHint.setWidth(int(sizeHint.width() + textWidth))
         return sizeHint
 
     def minimumSizeHint(self) -> QSize:
@@ -43,12 +43,12 @@ class SARibbonCtrlContainer(QWidget):
         if self.enableDrawIcon:
             icon = self.windowIcon()
             if not icon.isNull():
-                sizeHint.setWidth(sizeHint.width() + sizeHint.height())
+                sizeHint.setWidth(int(sizeHint.width() + sizeHint.height()))
         if self.enableDrawTitle:
             text = self.windowTitle()
             if text:
                 textWidth = self.fontMetrics().horizontalAdvance(text[0])
-                sizeHint.setWidth(sizeHint.width() + textWidth * 2)
+                sizeHint.setWidth(int(sizeHint.width() + textWidth * 2))
         return sizeHint
 
     def containerWidget(self) -> QWidget:
@@ -96,7 +96,7 @@ class SARibbonCtrlContainer(QWidget):
                     SARibbonDrawHelper.drawText(
                         text, painter, opt,
                         Qt.AlignLeft | Qt.AlignVCenter,
-                        QRect(x, 0, textWidth, opt.rect.height())
+                        QRect(int(x), 0, int(textWidth), int(opt.rect.height()))
                     )
 
     def resizeEvent(self, e):
@@ -122,7 +122,7 @@ class SARibbonCtrlContainer(QWidget):
                     x += textWidth + 2
 
         if self.containerWidget:
-            self.containerWidget.setGeometry(x, 0, self.width() - x, self.height())
+            self.containerWidget.setGeometry(int(x), 0, int(self.width() - x), int(self.height()))
 
     def initStyleOption(self, opt: QStyleOption):
         opt.initFrom(self)

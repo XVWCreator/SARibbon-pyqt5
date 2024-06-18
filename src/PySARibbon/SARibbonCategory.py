@@ -169,7 +169,7 @@ class SARibbonCategoryPrivate:
         mag = self.mContentsMargins
         if not mag.isNull():
             s.setHeight(s.height() - (mag.top() + mag.bottom()))
-            s.setWidth(s.width() - (mag.right() + mag.left()))
+            s.setWidth(int(s.width() - (mag.right() + mag.left())))
         return s
 
     def updateItemGeometry(self):
@@ -205,13 +205,13 @@ class SARibbonCategoryPrivate:
             separatorSize = item.separatorWidget.sizeHint() if item.separatorWidget else QSize(0, 0)
             if p.isExpanding():
                 # 可扩展，就把pannel扩展到最大
-                pSize.setWidth(pSize.width() + expandWidth)
+                pSize.setWidth(int(pSize.width() + expandWidth))
             w = pSize.width()
-            item.mWillSetGeometry = QRect(x, y, w, contentSize.height())
+            item.mWillSetGeometry = QRect(int(x), int(y), int(w), int(contentSize.height()))
             x += w
             total += w
             w = separatorSize.width()
-            item.mWillSetSeparatorGeometry = QRect(x, y, w, contentSize.height())
+            item.mWillSetSeparatorGeometry = QRect(int(x), int(y), int(w), int(contentSize.height()))
             x += w
             total += w
         self.mTotalWidth = total
@@ -245,8 +245,8 @@ class SARibbonCategoryPrivate:
     def doItemLayout(self):
         category: SARibbonCategory = self.ribbonCategory()
         # 两个滚动按钮的位置永远不变
-        self.mLeftScrollBtn.setGeometry(1, 0, 12, category.height())
-        self.mRightScrollBtn.setGeometry(category.width()-13, 0, 12, category.height())
+        self.mLeftScrollBtn.setGeometry(1, 0, 12, int(category.height()))
+        self.mRightScrollBtn.setGeometry(int(category.width()-13), 0, 12, int(category.height()))
         showWidgets = list()
         hideWidgets = list()
         for item in self.mItemList:

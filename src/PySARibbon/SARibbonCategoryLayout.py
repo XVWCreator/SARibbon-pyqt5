@@ -190,13 +190,13 @@ class SARibbonCategoryLayout(QLayout):
             separatorSize = item.separatorWidget.sizeHint() if item.separatorWidget else QSize(0, 0)
             if p.isExpanding():
                 # 可扩展，就把pannel扩展到最大
-                pSize.setWidth(pSize.width() + expandWidth)
+                pSize.setWidth(int(pSize.width() + expandWidth))
             w = pSize.width()
-            item.mWillSetGeometry = QRect(x, y, w, height)
+            item.mWillSetGeometry = QRect(int(x), int(y), int(w), int(height))
             x += w
             total += w
             w = separatorSize.width()
-            item.mWillSetSeparatorGeometry = QRect(x, y, w, height)
+            item.mWillSetSeparatorGeometry = QRect(int(x), int(y), int(w), int(height))
             x += w
             total += w
         self.m_d.mTotalWidth = total
@@ -210,8 +210,8 @@ class SARibbonCategoryLayout(QLayout):
             self.updateGeometryArr()
         category: QWidget = self.parentWidget()
         # 两个滚动按钮的位置永远不变
-        self.m_d.mLeftScrollBtn.setGeometry(0, 0, 12, category.height())
-        self.m_d.mRightScrollBtn.setGeometry(category.width()-12, 0, 12, category.height())
+        self.m_d.mLeftScrollBtn.setGeometry(0, 0, 12, int(category.height()))
+        self.m_d.mRightScrollBtn.setGeometry(int(category.width()-12), 0, 12, int(category.height()))
         showWidgets = list()
         hideWidgets = list()
         for item in self.m_d.mItemList:

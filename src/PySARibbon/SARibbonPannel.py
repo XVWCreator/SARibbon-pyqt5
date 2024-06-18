@@ -217,7 +217,7 @@ class SARibbonPannel(QWidget):
             titleSize = fm.size(Qt.TextShowMnemonic, self.windowTitle())
             if self.m_optionActionButton:
                 # optionActionButton的宽度需要预留
-                titleSize.setWidth(titleSize.width()+self.m_optionActionButton.width()+4)
+                titleSize.setWidth(int(titleSize.width()+self.m_optionActionButton.width()+4))
             maxWidth = max(maxWidth, laySize.height())
         return QSize(maxWidth, laySize.height())
 
@@ -245,7 +245,7 @@ class SARibbonPannel(QWidget):
 
     def moveAction(self, fr: int, to: int):
         """移动action"""
-        self.m_layout.move(fr, to)
+        self.m_layout.move(int(fr), int(to))
         self.updateGeometry()
 
     def isCanCustomize(self) -> bool:

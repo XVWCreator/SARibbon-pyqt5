@@ -166,7 +166,7 @@ class WidgetData:
         elif self.m_pressedMousePos.m_bOnBottomEdge:
             bottom = pos.y()
 
-        newRect = QRect(QPoint(left, top), QPoint(right, bottom))
+        newRect = QRect(int(QPoint(left), int(top)), int(QPoint(right), int(bottom)))
         if newRect.isValid():
             if minWidth > newRect.width():
                 if left != origRect.left():
@@ -248,9 +248,9 @@ class WidgetData:
                     rx = event.globalX()
                     ry -= 10
                     rx -= (normalGeometry.width() / 2)
-                    self.m_pWidget.move(rx, ry)
+                    self.m_pWidget.move(int(rx), int(ry))
                     # 这时要重置m_ptDragPos
-                    self.m_ptDragPos = QPoint(normalGeometry.width()/2, 10)
+                    self.m_ptDragPos = QPoint(int(normalGeometry.width()/2), 10)
                     return True
 
                 self.moveWidget(event.globalPos())

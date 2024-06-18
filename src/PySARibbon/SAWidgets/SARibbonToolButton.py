@@ -391,29 +391,29 @@ class SARibbonToolButton(QToolButton):
             if s.width() > s.height() * 1.4:
                 alignment = Qt.TextShowMnemonic | Qt.TextWordWrap
                 fm = self.fontMetrics()
-                textRange = self.calcTextRect(QRect(0, 0, int(s.width() / 2), s.height()))
+                textRange = self.calcTextRect(QRect(0, 0, int(s.width() / 2), int(s.height())))
                 textRange.moveTo(0, 0)
                 textRange = fm.boundingRect(textRange, alignment, self.text())
-                s.setWidth(textRange.width()+4)
+                s.setWidth(int(textRange.width()+4))
                 self.m_isWordWrap = textRange.height() > fm.lineSpacing()
                 if (opt.features & QStyleOptionToolButton.Menu) or (opt.features & QStyleOptionToolButton.HasMenu):
                     # 如果有菜单
                     if self.largeButtonType() == self.Lite or self.m_isWordWrap:
-                        s.setWidth(s.width()+ARROW_WIDTH)
+                        s.setWidth(int(s.width()+ARROW_WIDTH))
             else:
                 self.m_isWordWrap = '\n' in self.text()
                 if (opt.features & QStyleOptionToolButton.Menu) or (opt.features & QStyleOptionToolButton.HasMenu):
                     # 如果有菜单
                     if self.largeButtonType() == self.Normal and self.m_isWordWrap:
-                        s.setWidth(s.width()+ARROW_WIDTH)
+                        s.setWidth(int(s.width()+ARROW_WIDTH))
         else:
             # 在仅有图标的小模式显示时，预留一个下拉箭头位置
             if self.toolButtonStyle() == Qt.ToolButtonIconOnly:
                 if (opt.features & QStyleOptionToolButton.Menu) or (opt.features & QStyleOptionToolButton.HasMenu):
-                    s.setWidth(s.width()+ARROW_WIDTH)
+                    s.setWidth(int(s.width()+ARROW_WIDTH))
             else:
                 if not ((opt.features & QStyleOptionToolButton.Menu) or (opt.features & QStyleOptionToolButton.HasMenu)):
-                    s.setWidth(s.width()-4)
+                    s.setWidth(int(s.width()-4))
         # print(__file__, 'size hint', s)
         return s
 
